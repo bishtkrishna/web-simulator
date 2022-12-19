@@ -162,12 +162,14 @@ button.compare-data{
     font-family: "'Inter', sans-serif"
 }
 .graph-heading {
-    position: absolute;
+    display: flex;
+    justify-content: center;
     left: 600px;
     color: #0272d5;
-    padding: 4px;
     font-weight: 600;
     font-size: 18px;
+    /* position: absolute; */
+    /* padding: 4px; */
     /* top: 21px; */
 }
 .portfolioVolume .brand-graph{
@@ -226,8 +228,8 @@ button.compare-data{
 .toggle-flex{
     display: flex;
     /* margin: -30px 10px; */
-    position: absolute;
-    top: 1px;
+    /* position: absolute; */
+    /* top: 1px; */
     right: 10px;
 }
 .toggle-portfolio {
@@ -243,12 +245,15 @@ img.logo-brand {
 .execution-data{
     /* width: 1318px; */
     overflow-x: auto;
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    margin-top: 2px;
     margin-bottom: 30px;
     display: flex;
     /* border: solid 1px; */
     /* padding: 0px 5px 5px 5px; */
-    height:240px;
+    height:249px;
+    /* height:240px; */
+
     background: #e5e2e2;
     border-radius: 5px;
 }
@@ -294,12 +299,13 @@ table.simulator-table td{
 }
 .simulator-table thead, th{
     background: #000;
-    padding: 7px;
+    /* padding: 7px; */
+    padding:11px;
     text-align: center;
     color: #fff;
     font-weight: 400;
-    border-right: solid 1px #000;
-    border-left: solid 1px #000;
+    border-right: solid 0px #000;
+    border-left: solid 0px #000;
 } 
 table.simulator-data {
     background: #fff;
@@ -383,7 +389,9 @@ tr.dig-sub-head.mh td {
     height: 50px;
     position: sticky;
 	position: -webkit-sticky;
-	top: 62px;
+	/* top: 62px; */
+
+    top: 44px;
 	z-index: 2;
 }
 /* .td-height td{
@@ -497,8 +505,11 @@ td.flex-align.width{
   }
 
   .toggle-flex.media-toggle {
-    top: 286px;
-    height: 51px;
+    /* top: 286px; */
+    /* height: 51px; */ 
+    /* Need clearification */
+
+
     /* position: relative;
     right: -1204px;
     z-index: 1;
@@ -730,9 +741,13 @@ p.comment-text {
     left: 3px;
 }
 .grp-graph-section{
-    margin-top:10px; 
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    /* margin-top:10px;  */
+    margin-top: 2px;
     padding: 0px; 
-    height: 600px; 
+    /* height: 600px;  */
     border:solid 1px black 
 }
 .grp-strip{
@@ -857,8 +872,10 @@ th {
     background-color: #000;
     text-align: center;
     width: 100%;
-    margin-top: 30px;
+    /* margin-top: 30px; */
     /* padding: 7px; */
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
 }
 .tablerowheader{
     text-align: start;
@@ -870,4 +887,24 @@ th {
     text-align: start;
     /* width: 0px; */
     width: 20px 
+}
+.pie-outer{ 
+    margin-right: 0;
+    margin-left: 0;
+}
+.chart1{ 
+    margin-top: -49px;
+}
+.vol-dropdown{ 
+    width:150px;
+    height:25px;
+    float: right;
+    margin-top: -10px;
+    
+    background: #1b2559;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
 }

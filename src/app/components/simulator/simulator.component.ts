@@ -312,7 +312,7 @@ export class SimulatorComponent implements OnInit {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'right',
         display:true
       },
       title: {
@@ -328,7 +328,7 @@ export class SimulatorComponent implements OnInit {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top',
+        position: 'right',
         display:true
       },
       title: {

@@ -34,7 +34,6 @@
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/jquery-3.5.1.min.js",
 
               "node_modules/bootstrap/dist/js/bootstrap.js"
             ]

@@ -324,11 +324,14 @@
                 <li class="breadcrumb-item active" aria-current="page">{{selectedDetails.name}}</li>
               </ol>
             </nav> -->
+
+            <!-- start -->
             <div class="graph-heading">Results are at National Level</div>
-            <div style=" position: sticky;top:0;border: solid 1px;
-            padding-top: 30px; border-radius: 5px;">
+            <div class="d-flex" style="top:0;border: solid 1px;
+             border-radius: 5px;">
+             <!-- padding-top: 30px;position: sticky; -->
               <!-- z-index: 999; removed for displaying over a graph-->
-              <form (ngSubmit)="formSubmit()" #demoForm="ngForm"  >
+              <form (ngSubmit)="formSubmit()" #demoForm="ngForm"  class="w-100">
                   <div class="toggle-flex" *ngIf="brand_list.length > 1">
                     <div class="toggle-portfolio" >Portfolio</div>
                     <mat-slide-toggle #ExeCution (change)="onToggleChange(model.ifPrint)"  [(ngModel)]="model.ifPrint" name="ExeCution"></mat-slide-toggle> 
@@ -393,7 +396,7 @@
                       </div>
                     <div class="volume-brand-graph">
                       <div>
-                      <select #selectVolList   (change)="ChangeVolumeDueCharts(selectVolList.value)"style="width:150px;height:25px;float: right;margin-top: -10px"> 
+                      <select #selectVolList class="vol-dropdown"  (change)="ChangeVolumeDueCharts(selectVolList.value)"> 
                         <option [value]="ichart" *ngFor="let ichart of volumeChartNames; index as i" >{{ichart}}
                         </option> 
                       </select>
@@ -417,7 +420,7 @@
                       [legend]="true"
                       > -->
                       <!-- </canvas> -->
-                      <div style="display: block;padding-top: 15px;" *ngIf="showgraph == 'volume'">
+                      <div style="display: block;" *ngIf="showgraph == 'volume'">
                         <canvas baseChart
                           [data]="floatVolumeBarChartData"
                           [options]="floatVolumeChartOptions"
@@ -432,7 +435,7 @@
                           (chartHover)="chartHovered($event)"
                           (chartClick)="chartClicked($event)">
                         </canvas> -->
-                        <div style="display: block;padding-top: 15px;" *ngIf="showgraph == 'revenue'">
+                        <div style="display: block;" *ngIf="showgraph == 'revenue'">
                           <canvas baseChart
                             [data]="floatRevenueBarChartData"
                             [options]="floatRevenueChartOptions"
@@ -450,6 +453,9 @@
                     </div>
               </form>
             </div>
+
+            <!-- third div -->
+
               <!-- Execution Data start from here -->
               <div class="execution-data" *ngIf="execution">
               
@@ -514,16 +520,17 @@
                   <!-- Distribution TDP Table -->
                  
               </div>
-           
-              <div [ngClass] = "'!model.Media && media' ? 'toggle-flex.media-toggle':'toggle-flex.pie-toggle'" class="toggle-flex media-toggle" *ngIf="selectedChannel != 'all'">
-                <div class="toggle-portfolio">Table</div>
-                <mat-slide-toggle #TV  [(ngModel)]="model.Media" name="Media"></mat-slide-toggle> 
-                <div class="toggle-brand">Chart</div>
-              </div>
+           <div class="d-flex justify-content-end"> 
+             <div [ngClass] = "'!model.Media && media' ? 'toggle-flex.media-toggle':'toggle-flex.pie-toggle'" class="toggle-flex media-toggle" *ngIf="selectedChannel != 'all'">
+               <div class="toggle-portfolio">Table</div>
+               <mat-slide-toggle #TV  [(ngModel)]="model.Media" name="Media"></mat-slide-toggle> 
+               <div class="toggle-brand">Chart</div>
+             </div>
+           </div>
             <!-- Media Data start from here -->
             <div class="execution-data" *ngIf="!model.Media && media">
-              <div id="A" class="simulator" >
-                <table width="200" class="simulator-data td-height">
+              <div id="A" class="simulator w-100" >
+                <table width="100%" class="simulator-data td-height">
                     <thead>
                       <tr>
                         <th colspan="1"> &nbsp;</th>    
@@ -626,19 +633,23 @@
             </div>
 
             <div class="col-md-12" class="grp-graph-section" *ngIf="model.Media">
-              <div class="header-graph-logo">
-                <div class="row">
-                <p class= "col-lg-6 col-md-6" style="color:white;margin-top:5px">{{this.selectedMedia}} Spend </p>
-                <p  class= "col-lg-6 col-md-6" style="color:white;margin-top: 5px;">{{this.selectedMedia}} GRP </p>
+              <div class="header-graph-logo flex d-flex">
+                <div class="col-lg-6 col-md-6 flex d-flex justify-content-start">
+                  <p class= "col-lg-6 col-md-6 px-4" style="color:white;margin-top:5px">{{this.selectedMedia}} Spend </p>
+                  <p  class= "col-lg- col-md-6 px-4" style="color:white;margin-top: 5px;">{{this.selectedMedia}} GRP </p>
+                </div>
+                <div class="col-lg-6 col-md-6 flex d-flex justify-content-start">
+                 <!-- space -->
+                </div>
               </div>
-            </div>
-              <div class="row">
-              <div class="col-md-6" style=" width:500px;padding-top: 30px;">
+              <div class="row pie-outer">
+              <div class="col-md-6 ml-5" style=" width:500px;max-width: 330px; max-height: 200px">
                 <canvas baseChart
+                class="chart1"
                 [data]="pieSpendChartData"
                 [options]="pieSpendChartOptions"
                 [type]="doughnutChartType"
-                width="600" height="295"
+                
                 ></canvas>
                 <!-- <highcharts-chart
                  [Highcharts] = "highcharts5" 
@@ -646,18 +657,20 @@
                  style = "width: 100%; height: 300px;">
                 </highcharts-chart> -->
               </div>
-              <div class="col-md-6" style="width:500px;padding-top: 30px;">
+              <div class="col-md-6 ml-5" style="width:500px; max-width: 330px; max-height: 200px">
                 <canvas baseChart 
+                class="chart1"
                 [data]="pieGrpChartData"
                 [options]="pieGrpChartOptions"
                 [type]="doughnutChartType"
                 [plugins]="doughnutChartPlugins"
-                width="600" height="295"
                 ></canvas>
                 <!-- <highcharts-chart
                   [Highcharts] = "highcharts6" 
                   [options] = "chartOptions6" 
                   style = "width: 100%; height: 300px;">
+                  width="600" height="295"
+width="600" height="295"
                 </highcharts-chart> -->
               </div>
               </div>

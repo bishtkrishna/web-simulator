@@ -1,0 +1,55 @@
+<!-- <app-compare></app-compare> -->
+
+<div class="top-navbar">
+              <mat-form-field>
+                <mat-select placeholder="Brand">
+                  <mat-select-trigger>
+                    <img class="logo-icon" src="../../../assets/images/pepsi_icon.png"> Pepsi
+                  </mat-select-trigger>
+                  <mat-option value="option">
+                    <img class="logo-icon" src="../../../assets/images/lipton_icon.png"> Liption
+                  </mat-option>
+                  <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/7up_icon.png"> 7UP
+                  </mat-option>
+                  <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/pepsi_icon.png"> Pepsi
+                  </mat-option>
+                  <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/lipton_icon.png"> Liption
+                  </mat-option>
+                  <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/pepsi_icon.png"> Pepsi
+                  </mat-option>
+                  <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/7up_icon.png"> 7UP
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Execution">
+                  <mat-option value="option" (click)="onExecution()">
+                    Execution - 1
+                  </mat-option>
+                  <mat-option value="option" (click)="onExecution()">
+                    Execution - 2
+                  </mat-option>
+                  <mat-option value="option" (click)="onExecution()">
+                    Execution - 3
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select placeholder="Media">
+                  <mat-option value="option" (click)="showMedia()">
+                   TV
+                  </mat-option>
+                  <mat-option value="option">
+                   Digital
+                   </mat-option>
+                </mat-select>
+              </mat-form-field>
+                <button class="navbar-button btn-blue"><mat-icon>save</mat-icon> Save Scenario</button>
+                <button class="navbar-button btn-green"><mat-icon>remove_red_eye</mat-icon>Compare</button>
+                <!-- <button class="navbar-button btn-green"><mat-icon>check</mat-icon>Complete</button> -->
+            </div>

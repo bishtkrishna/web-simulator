@@ -1,0 +1,243 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- <div class="header-logo">
+            <img src="assets/images/header_logo.jpg" style="position: relative;
+            top: -5px;"><span style="color:white">Canvas/Business Simulator </span>
+        </div> -->
+        <nav aria-label="breadcrumb" style="background: #efeeee;width: 100%;height: 30px;">
+          <ol class="breadcrumb" style="height: 30px;padding: 0.4rem;background: #efeeee">
+            <button style="width: 40px;
+              height: 30px;
+              border: transparent;
+              background: transparent;
+               display: flex; font-style: bold;" (click)="back()" ><span class="material-icons">arrow_back</span></button>
+            <li class="breadcrumb-item" style="margin-left: 10px;">
+              <a [href]="['/scenario']">Home</a> 
+            </li>
+            <li class="breadcrumb-item" >
+              <a href="javascript:void(0)" (click)="back()">NewScenario</a></li>
+            <li class="breadcrumb-item active" aria-current="page">InputConstraint</li>
+          </ol>
+        </nav>
+        <div class="brand-dropdown">
+          <div class="dropdown">
+            <button class="btn brand-nav dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Select Brand
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a *ngFor="let b of brand_list" (click)="selectBrand(b)" class="dropdown-item brand-logo"><img src="assets/images/pepsi_icon.png">{{b}}</a>
+            
+              <!-- <a class="dropdown-item brand-logo" href="#"><img src="../../../assets/images/7up_icon.png">7Up</a>  -->
+            </div>
+            <img style="width: 30px; height: 30px; margin-left: 20px;" src="assets/images/pepsi_icon.png">{{ selectedBrand }}
+          </div>
+      </div>
+      
+        <div class="col-lg-3 col-md-3" >
+            <button class="main-btn" (click)="showDiv.previous = true; showDiv.current = false;showDiv.next = false; showDiv.media = false"><img class="icon" src="assets/images/icon-1.jpg"> Growth <img class="arrow" src="assets/images/arrow.jpg"> </button>
+            <button class="main-btn" (click)="showDiv.current = true; showDiv.previous = false; showDiv.next = false; showDiv.media = false" *ngIf="channel_trade[selectedBrand] && channel_trade[selectedBrand].length > 0"><img class="icon" src="assets/images/icon-1.jpg"> Trade <img class="arrow" src="assets/images/arrow.jpg"> </button>
+            <button class="main-btn" (click)="showDiv.next = true; showDiv.previous = false;showDiv.current = false; showDiv.media = false" *ngIf="tv_genres[selectedBrand] && tv_genres[selectedBrand].length > 0"><img class="icon" src="assets/images/icon-1.jpg"> TV <img class="arrow" src="assets/images/arrow.jpg"> </button>
+            <button class="main-btn" (click)="showDiv.media = true; showDiv.previous = false;showDiv.next = false; showDiv.current = false" *ngIf="digital_platforms[selectedBrand] && digital_platforms[selectedBrand].length > 0"><img class="icon" src="../../../assets/images/icon-1.jpg"> Digital <img class="arrow" src="assets/images/arrow.jpg"> </button>
+        </div>
+        <div class="col-lg-9 col-md-9" >
+            <div class="main-container" *ngIf="showDiv.previous && brand_list.length > 1 && pga">
+              <div class="main-title">
+                <div class="row">
+                <div class="col-6">
+                  <span >Growth</span> 
+                </div>
+                <div class="col-6">
+                  <span > Reporting Period: </span>
+                  <span style="color: #0272d5;">{{reportingPeriod}}</span>
+                </div>
+                </div>
+              </div>
+                    <form class="data-group">
+                        <div class="input-group">
+                            <label>Growth Ambition</label>
+                            <input type="number" class="form-control" [readonly] = "simulation_status > 2" [name]="'growth_ambition'" [(ngModel)]="input_values_by_brand[selectedBrand].growth_ambition" placeholder="Enter Growth Ambition" (blur)="validate(selectedBrand, 'growth_ambition')">
+                            <div class="input-group-append">
+                              <span class="input-group-text">%</span>
+                            </div>
+                          </div>
+                          <div class="C-volume">
+                              <span class="Vname">Current Volume</span>
+                              <span class="Vdata">{{total_volume[selectedBrand]}}M</span>
+                          </div>
+                          <div class="col-md-9" >
+                            <div class="input-group" >
+                              Portfolio growth ambition
+                              <span class="Vdata">{{pga}}%</span>
+                            </div>
+                          </div>
+                          <div class="col-md-9">
+                            <div class="input-group" style="width: 100%;">
+                              Note: Fields are pre filled but you can change values.
+                            </div>
+                            
+                          </div>
+                          
+                    </form>
+            </div>
+            <div class="main-container" *ngIf="showDiv.previous && (brand_list.length <= 1 || !pga)">
+              <div class="main-title">
+                <div class="row">
+                <div class="col-6">
+                  <span >Growth</span> 
+                </div>
+                <div class="col-6">
+                  <span > Reporting Period: </span>
+                  <span style="color: #0272d5;">{{reportingPeriod}}</span>
+                </div>
+                </div>
+              </div>
+                  <form class="data-group">
+                      <div class="input-group">
+                          <label>Growth Ambition</label>
+                          <input type="number" class="form-control" [readonly] = "selectedDetails.simulation_status == 1" [name]="'growth_ambition'" [(ngModel)]="input_values_by_brand[selectedBrand].growth_ambition" placeholder="Enter Growth Ambition" (blur)="validate(selectedBrand, 'growth_ambition')">
+                          <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                          </div>
+                        </div>
+                        <div class="C-volume">
+                            <span class="Vname">Current Volume</span>
+                            <span class="Vdata">{{total_volume[selectedBrand]}}M</span>
+                        </div>
+                        <div class="col-md-9">
+                          <div class="input-group" style="width: 100%;">
+                            Note: Fields are pre filled but you can change values.
+                          </div>
+                          
+                        </div>
+                        
+                  </form>
+            </div>
+            <div class="main-container" *ngIf="showDiv.current && (channel_trade[selectedBrand] && channel_trade[selectedBrand].length > 0)">
+                <!-- <div class="main-title">Trade</div> -->
+                <div class="main-title">
+                  <div class="row">
+                  <div class="col-6">
+                    <span >Trade</span> 
+                  </div>
+                  <div class="col-6">
+                    <span > Reporting Period: </span>
+                    <span style="color: #0272d5;">{{reportingPeriod}}</span>
+                  </div>
+                  </div>
+                </div>
+                <form class="data-group">
+                      <div class="cpg">Internal DA Percent</div>
+
+                      <div class="input-group" *ngFor="let channel of channel_trade[selectedBrand], let i=index">
+                        <label>{{channel.channel}}</label>
+                        <input type="text" class="form-control" [readonly] = "selectedDetails.simulation_status == 1" name="channel-{{i}}" [(ngModel)]="channel.current_trade" placeholder="Enter Value">
+                        <div class="input-group-append">
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="input-group" style="width: 100%;">
+                          Note: Fields are pre filled but you can change values.
+                        </div>
+                        
+                      </div>
+                </form>
+            </div>
+            <div class="main-container" *ngIf="showDiv.next && (tv_genres[selectedBrand] && tv_genres[selectedBrand].length > 0)">
+                <!-- <div class="main-title">TV</div> -->
+                <div class="main-title">
+                  <div class="row">
+                  <div class="col-6">
+                    <span >TV</span> 
+                  </div>
+                  <div class="col-6">
+                    <span > Reporting Period: </span>
+                    <span style="color: #0272d5;">{{reportingPeriod}}</span>
+                  </div>
+                  </div>
+                </div>
+                <form class="data-group">
+                  <div class="input-group">
+                    <label>Total TV Spend</label>
+                    <input type="number" class="form-control" [readonly] = "selectedDetails.simulation_status == 1"  [(ngModel)]="input_values_by_brand[selectedBrand].total_tv_spend"  name="total_tv_spend" placeholder="Enter Total TV Spend" (blur)="validate(selectedBrand, 'total_tv_spend')">
+                    <div class="input-group-append">
+                    </div>
+                  </div>
+                     
+                       
+                      <div class="cpg">Cost Per GRP (per {{tv_total_data[selectedBrand][0].one_unit_metric_quantity 
+                        + &nbsp; tv_total_data[selectedBrand][0].metric_type}})</div>
+                      <div class="input-group" *ngFor="let genre of tv_genres[selectedBrand], let i=index">
+                        <label>{{genre.genre_platform}}</label>
+                        <input type="text" class="form-control" [readonly] = "selectedDetails.simulation_status == 1" name="genre-{{i}}" [(ngModel)]="genre.current_cost_per_unit" placeholder="Enter Value">
+                        <div class="input-group-append">
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="input-group" style="width: 100%;">
+                          Note: Fields are pre filled but you can change values.
+                        </div>
+                        
+                      </div>
+                </form>
+            </div>
+
+            <div class="main-container" *ngIf="showDiv.media && (digital_platforms[selectedBrand] && digital_platforms[selectedBrand].length > 0)">
+                <!-- <div class="main-title">Digital</div> -->
+                <div class="main-title">
+                  <div class="row">
+                  <div class="col-6">
+                    <span >Digital</span> 
+                  </div>
+                  <div class="col-6">
+                    <span > Reporting Period: </span>
+                    <span style="color: #0272d5;">{{reportingPeriod}}</span>
+                  </div>
+                  </div>
+                </div>
+                <form class="data-group">
+                  <div class="input-group">
+                    <label>Total digital Spend</label>
+                    <input type="number" class="form-control" [readonly] = "selectedDetails.simulation_status == 1" [(ngModel)]="input_values_by_brand[selectedBrand].total_spend"  name="total_spend" placeholder="Enter Total Digital Spend" (blur)="validate(selectedBrand, 'total_spend')">
+                    <div class="input-group-append">
+                    </div>
+                  </div>
+                  <div class="cpg">Cost Per Metric (per {{digital_total_data[selectedBrand][0].one_unit_metric_quantity}} {{digital_total_data[selectedBrand][0].metric_type}})</div>
+
+                    <div class="input-group" *ngFor="let platform of digital_platforms[selectedBrand], let i=index">
+                      <label>{{platform.genre_platform}}</label>
+                      <input type="text" class="form-control" [readonly] = "selectedDetails.simulation_status == 1" name="platform-{{i}}"   [(ngModel)]="platform.current_cost_per_unit" placeholder="Enter Value">
+                      <div class="input-group-append">
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="input-group" style="width: 100%;">
+                        Note: Fields are pre filled but you can change values.
+                      </div>
+                      
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="row" *ngIf="errors.length > 0">
+              <div class="col">
+                <ul>
+                  <li *ngFor="let error of errors" style="color: red;">
+                    {{error}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button class="run-simulation-cancel" [routerLink]="['/scenario']">Cancel</button>
+              </div>
+            <div class="col">
+            <button [ngClass]="disabled ? 'run-simulation disabled' : 'run-simulation'" (click)="openAlertBox()" [disabled]="disabled">Run Base Simulation</button>
+            </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+

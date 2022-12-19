@@ -1,0 +1,669 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- <div class="header-logo">
+          <div class="left-top-filter">
+            <div class="btn"
+					(click)="showDiv.Mfilter = !showDiv.Mfilter;showDiv.MediaFilter = false;showDiv.tvFilter = false;">
+          <mat-icon class="dialpad"> view_headline</mat-icon>
+				</div> -->
+        <!-- Top Filter start from here -->
+
+        <!-- <div class="filter-cont" *ngIf="showDiv.Mfilter">
+          <div class="filter-title">
+            <img src="../../../assets/images/filter_icon.jpg"> <span>Growth</span>
+          </div>
+            <div class="growth-sec">
+              <div class="g-input">
+                <label>Growth Ambition</label>
+              
+              <div class="input-group-append">
+                <input type="text" class="form-control input-append" placeholder="0" [(ngModel)]="growthAchieved" disabled>
+                <span class="input-group-text input-align">%</span>
+              </div>
+              </div>
+              <div class="g-volume">
+                <span class="Vname">Current Volume</span>
+              <span class="Vdata">{{total_volume[selectedBrand]}}M</span>
+              </div>
+            </div>
+            <div class="filter-title">
+              <img src="../../../assets/images/filter_icon.jpg"> <span>Trade</span>
+            </div>
+            <div class="growth-sec">
+              <div class="g-input">
+                <label>Max Trade</label>              
+              <div class="input-group-append">
+                <input type="text" class="form-control input-append" placeholder="0" disabled>
+                <span class="input-group-text input-align">{{input_values_by_brand[selectedBrand].max_trade}}%</span>
+              </div>
+              </div>
+              <div class="g-volume">
+                <span class="Vname">Current DA</span>
+              <span class="Vdata">{{input_values_by_brand[selectedBrand].current_da}}%</span>
+              </div>
+            </div>
+            <div class="filter-title">
+              <img src="../../../assets/images/filter_icon.jpg"> <span>TV</span>
+              <div class="subside-filter"
+					(click)="showDiv.tvFilter = !showDiv.tvFilter;showDiv.MediaFilter = false;">
+					<mat-icon class="play-arrow">play_arrow</mat-icon>
+				</div>
+            </div>
+            <div class="growth-sec">
+              <div class="g-input">
+                <label>WOA</label>
+              <div class="input-group-append">
+                <input type="text" class="form-control input-append" [(ngModel)]="input_values_by_brand[selectedBrand].woa" placeholder="0" disabled>
+                <span class="input-group-text input-align">%</span>
+              </div>
+              </div>
+              <!-- <div class="g-input">
+                <label>Total</label>
+              <div class="input-group-append">
+                <input type="text" class="form-control input-append" [(ngModel)]="input_values_by_brand[selectedBrand].total_tv_spend" placeholder="0" disabled> -->
+                <!-- <span class="input-group-text input-align">%</span> -->
+              <!-- </div>
+              </div> -->
+            <!-- </div> -->
+            <!-- <div class="filter-title">
+                <img src="../../../assets/images/filter_icon.jpg"> <span>Media</span>
+                <div class="subside-filter"
+                    (click)="showDiv.MediaFilter = !showDiv.MediaFilter;showDiv.tvFilter = false;"><mat-icon class="play-arrow">play_arrow</mat-icon>
+                </div>
+            </div>
+            <div class="g-input">
+              <label>Total Digital Spend</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" [(ngModel)]="input_values_by_brand[selectedBrand].total_spend" placeholder="0" disabled> -->
+              <!-- <span class="input-group-text input-align">%</span> -->
+            <!-- </div>
+            </div> -->
+            <!-- <div class="growth-sec">
+              <div class="g-volume">
+                <span class="Vname Mwidth ">Total Digital Spend</span>
+              <span class="Vdata">{{this.input_values_by_brand[selectedBrand].total_spend}}</span>
+              </div> -->
+              <!-- <div class="g-input">
+              </div> -->
+            <!-- </div> -->
+            <!-- <button class="btn btn-primary btn-sm shadow-none" style="width: 100%;" ><mat-icon style="float: left;top: 0px !important;
+              left: 0px !important;">arrow_back_ios</mat-icon> <span style="font-weight:500">Back to Input</span></button> -->
+        <!-- </div> -->
+
+        <!-- top sub filter TV start from here -->
+        <!-- <div class="subfilter-tv" *ngIf="showDiv.tvFilter">
+          <button (click)="showDiv.tvFilter = !showDiv.tvFilter;" class="close-btn"><mat-icon>close</mat-icon></button>
+          <div class="cost-grp">Cost Per GRP</div> -->
+          <!-- <div class="input-group" *ngFor="let genre of tv_genres[selectedBrand], let i=index">
+            <label>{{genre.genre_platform}}</label>
+            <input type="text" class="form-control" [readonly] = "selectedDetails.simulation_status == 1" name="genre-{{i}}" [(ngModel)]="genre.current_cost_per_unit" placeholder="Enter Value">
+            <div class="input-group-append">
+            </div>
+          </div> -->
+
+          <!-- <div class="g-input sub-track" *ngFor="let genre of tv_genres[selectedBrand], let i=index">
+            <label>{{genre.genre_platform}}</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" name="genre-{{i}}" [(ngModel)]="genre.current_cost_per_unit" disabled> -->
+              <!-- <span class="input-group-text input-align">%</span> -->
+            <!-- </div> -->
+          <!-- </div> -->
+
+          <!-- <div class="g-input sub-track">
+            <label>Sports Non Bein</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input sub-track">
+            <label>Fiction</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input sub-track">
+            <label>Entertainment</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input sub-track">
+            <label>Information amd Magazine</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div> -->
+        <!-- </div> -->
+        <!-- top sub filter Media start from here -->
+        <!-- <div class="subfilter-media" *ngIf="showDiv.MediaFilter">
+          <button (click)="showDiv.MediaFilter = !showDiv.MediaFilter;" class="close-btn"><mat-icon>close</mat-icon></button>
+          <div class="cost-grp">Cost Per GRP</div>
+          <div class="growth-sec" style="border: none; width: 100%;"> -->
+            <!-- <div class="g-volume">
+              <span class="Vname Mwidth ">Media Digital Spend Cap</span>
+            <span class="Vdata">20%</span>
+            </div>
+            <div class="g-input">
+            </div> -->
+          <!-- </div> -->
+
+          <!-- <div class="g-input mb-1" *ngFor="let platform of digital_platforms[selectedBrand], let i=index">
+            <label>{{platform.genre_platform}}</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" name="platform-{{i}}"   [(ngModel)]="platform.current_cost_per_unit" disabled> -->
+              <!-- <span class="input-group-text input-align">%</span> -->
+            <!-- </div> -->
+          <!-- </div> -->
+          <!-- <div class="g-input mb-1">
+            <label>Programmatic</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div> -->
+          <!-- <div class="g-input mb-1">
+            <label>DMS Network</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input mb-1">
+            <label>Facebook</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input mb-1">
+            <label>Snapchat</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input mb-1">
+            <label>Instrgram</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div>
+          <div class="g-input">
+            <label>Youtube</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div> -->
+          <!-- <div class="g-input">
+            <label>kooora.com</label>
+            <div class="input-group-append">
+              <input type="text" class="form-control input-append" placeholder="0" disabled>
+              <span class="input-group-text input-align">%</span>
+            </div>
+          </div> -->
+        <!-- </div>
+        </div> -->
+              <!-- <img src="../../../assets/images/header_logo.jpg" style="position: relative;
+              top: -5px;"><span style="color:white">Canvas/Business Simulator </span>
+              <div class="user-dropdown">
+                <img class="user-icon" src="../../../assets/images/user.png"> <span>User Name</span>
+            </div>
+              <button class="home-btn"><mat-icon>home</mat-icon></button>
+              <button class="insert-comment" data-toggle="collapse" href="#multiCollapseExample1">
+              <mat-icon> insert_comment</mat-icon>
+              </button>   -->
+
+              <!-- <div class="msg-toogle">
+                  <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="d-flex flex-column comment-section" id="myGroup">
+                      <div class="bg-white p-2">
+                          <div class="d-flex flex-row user-info"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                              <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">Marry Andrews</span><span class="date text-black-50">Shared publicly - Jan 2020</span></div>
+                          </div>
+                          <div class="mt-2">
+                              <p class="comment-text">Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur.</p>
+                          </div>
+                          <div class="d-flex flex-row align-items-start"><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
+                          <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button></div>
+                      </div>
+                     
+                      <div id="collapse-1" class="bg-light p-2 collapse" data-parent="#myGroup">
+                          <div class="d-flex flex-row align-items-start"><img class="rounded-circle" src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea class="form-control ml-1 shadow-none textarea"></textarea></div>
+                          <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none" type="button">Post comment</button><button class="btn btn-outline-primary btn-sm ml-1 shadow-none" type="button">Cancel</button></div>
+                      </div>
+                      <div id="collapse-2" class="bg-light p-2 collapse" data-parent="#myGroup">
+                          <div class="d-flex flex-row align-items-start"><i class="fa fa-facebook border p-3 rounded mr-1"></i><i class="fa fa-twitter border p-3 rounded mr-1"></i><i class="fa fa-linkedin border p-3 rounded mr-1"></i><i class="fa fa-instagram border p-3 rounded mr-1"></i><i class="fa fa-dribbble border p-3 rounded mr-1"></i> <i class="fa fa-pinterest-p border p-3 rounded mr-1"></i> </div>
+                      </div>
+                  </div>
+                  </div>
+              </div> -->
+              
+        <!-- </div> -->
+        <!-- <div> -->
+        <nav aria-label="breadcrumb" style="background: #efeeee;width: 100%;height: 40px;">
+          <ol class="breadcrumb" style="padding: 0.6rem;">
+            <button style="width: 40px;
+            height: 28px;
+            border: transparent;
+             display: flex; font-style: bold;" (click)="back()" ><span class="material-icons">arrow_back</span></button>
+              <li style = "margin-left: 10px;" (click)="navToScenario()"  class="breadcrumb-item">Home</li>
+              <li class="breadcrumb-item active" aria-current="page">{{selectedDetails.name}}</li>
+            </ol>
+          </nav>
+        <!-- </div> -->
+        <div class="col-lg-12 col-md-12">
+          <!-- <nav aria-label="breadcrumb" style="background: #efeeee;">
+            <ol class="breadcrumb">
+              <button style="width: 40px;
+              height: 30px;
+              border: transparent;
+               display: flex; font-style: bold;" (click)="back()" ><span class="material-icons">arrow_back</span></button>
+                <li style = "margin-left: 10px;" [routerLink]="['/scenario']" class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">{{selectedDetails.name}}</li>
+              </ol>
+            </nav> -->
+            <div class="top-navbar">
+              <mat-form-field>
+                <mat-label>Brand</mat-label>
+                <mat-select [(value)]="selectedBrand">
+                  <mat-option [value]="b" (click)="selectBrand(b)" *ngFor="let b of brand_list">
+                    <img class="logo-icon" src="../../../assets/images/pepsi_icon.png">{{ b }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <!--<mat-form-field>
+                
+                 <mat-select-trigger>
+                    <img class="logo-icon" src="../../../assets/images/pepsi_icon.png"> Pepsi
+                  </mat-select-trigger> -->
+                  <!-- <mat-option value="option" *ngFor="let b of brand_list" (click)="selectBrand(b)">
+                    <img class="logo-icon" src="../../../assets/images/lipton_icon.png"> {{brand_list}}
+                  </mat-option> -->
+                  <!-- <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/7up_icon.png"> 7UP
+                  </mat-option>
+                  <mat-option value="option">
+                    <img class="logo-icon"  src="../../../assets/images/pepsi_icon.png"> Pepsi
+                  </mat-option>
+                  
+                </mat-select>
+              </mat-form-field> -->
+              <mat-form-field>
+                <mat-label>Execution</mat-label>
+                <mat-select [(value)]="selectedChannel">
+                  <mat-option [value]="channel.channel" (click)="showValuesBasedonAlert(channel.channel)" *ngFor="let channel of channels">{{ channel.channel }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <mat-form-field>
+                <mat-label>Media</mat-label>
+
+                <mat-select [(value)]=selectedMedia>
+                  <mat-option value="TV" (click)="showValuesBasedonAlert('TV')">
+                   TV
+                  </mat-option>
+                  <mat-option value="Digital" (click)="showValuesBasedonAlert('Digital')">
+                   Digital
+                   </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button [routerLink]="['/compare']" class="navbar-button btn-green"><mat-icon>remove_red_eye</mat-icon>Compare</button>
+                <button style="float: right;" (click)="open()" [ngClass]="tryScenario ? 'navbar-button btn-blue' : 'navbar-button btn-grey'" *ngIf="simulation_status != 3" [disabled]="!tryScenario"><mat-icon>save</mat-icon> Save Scenario</button>
+                <!-- <button class="navbar-button btn-green"><mat-icon>check</mat-icon>Complete</button> -->
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 top">
+            <!-- <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li [routerLink]="['/scenario']" class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">{{selectedDetails.name}}</li>
+              </ol>
+            </nav> -->
+            <div class="graph-heading">Results are at National Level</div>
+            <div style=" position: sticky;top:0;border: solid 1px;
+            padding-top: 30px; border-radius: 5px;">
+              <!-- z-index: 999; removed for displaying over a graph-->
+              <form (ngSubmit)="formSubmit()" #demoForm="ngForm"  >
+                  <div class="toggle-flex" *ngIf="brand_list.length > 1">
+                    <div class="toggle-portfolio" >Portfolio</div>
+                    <mat-slide-toggle #ExeCution (change)="onToggleChange(model.ifPrint)"  [(ngModel)]="model.ifPrint" name="ExeCution"></mat-slide-toggle> 
+                    <div  class="toggle-brand">{{selectedBrand}} </div></div>
+                    <div [ngClass]="!model.ifPrint === true ? 'brandVolume' : 'portfolioVolume'">
+                      <div class="brand-graph">
+                        <canvas baseChart
+                            [data]="barChartData"
+                            [options]="barChartOptions"
+                            height="215"
+                            >
+                        </canvas>
+                        <!-- [plugins]="barChartPlugins" -->
+                          <!-- <highcharts-chart 
+                          [Highcharts] = "Highcharts" 
+                          [options] = "chartOptions"
+                          [(update)]="updateFlag"
+                          style = "width: 100%; height: 200px; display: block; position: relative; top:-40px">
+                        </highcharts-chart> -->
+                        
+                        <!-- [(update)]="updateFlag"  -->
+                        <!-- <div class="speed_sub_Sec">
+                          <hr  class="belowgraph_hr">
+                          <p  *ngIf = "tryScenario" class="your_scenario">{{yourScenario}}% Your Scenario</p>
+                          <hr *ngIf = "tryScenario" class="yoursc_belo_hr">
+                          <p [ngClass]="tryScenario ? 'grth_achieve_number' : 'trysc_grth_achieve_number'" ><b>{{growthAchieved}}%</b> </p>
+                          <p [ngClass]="tryScenario ? 'grth_achiev_text' : 'trysc_grth_achiev_text'">Growth Achieved </p>
+                          <hr [ngClass]="tryScenario ? 'grth_achiebelow_hr' : 'trysc_grth_achiebelow_hr'" >
+                          <p [ngClass]="tryScenario ? 'growth_ambition' : 'trysc_growth_ambition'" >{{growthAmbition}}% Growth Ambition </p>
+                        </div> -->
+                       
+                      </div>
+                      <div class="brand-graph">
+                        <canvas baseChart 
+                        [data]="spengraphdata"
+                        [options]="spengraphOptions"
+                        height="215"></canvas>
+
+                        <!-- <highcharts-chart
+                          [Highcharts] = "highchart2" 
+                          [options] = "chartOptions2" 
+                          [(update)]="updateFlag"
+                          style = "width: 100%; height: 220px; display: block;">
+                        </highcharts-chart> -->
+                        <!-- [options]="roigraphOptions" -->
+
+                      </div>
+                      <div class="brand-graph">
+                        <canvas baseChart
+                            [data]="roigrphChartData"
+                            [options]="roigraphOptions"
+                            height="215"
+                            >
+                        </canvas>
+                        <!-- <highcharts-chart
+                          [Highcharts] = "highchart3" 
+                          [options] = "chartOptions3" 
+                          [(update)]="updateFlag"
+
+                          style = "width: 100%; height: 220px; display: block;">
+                        </highcharts-chart> -->
+                      </div>
+                    <div class="volume-brand-graph">
+                      <div>
+                      <select #selectVolList   (change)="ChangeVolumeDueCharts(selectVolList.value)"style="width:150px;height:25px;float: right;margin-top: -10px"> 
+                        <option [value]="ichart" *ngFor="let ichart of volumeChartNames; index as i" >{{ichart}}
+                        </option> 
+                      </select>
+                      </div>
+                      <!-- <mat-radio-group [value]="showgraph"  aria-label="Select an option">
+                        <mat-radio-button value="volume" (change)="graphChange($event)">Volume Due to</mat-radio-button>
+                        <mat-radio-button value="revenue" (change)="graphChange($event)">Incremental Revenue</mat-radio-button>
+                      </mat-radio-group>  -->
+                      <!-- <highcharts-chart *ngIf="showgraph == 'volume'"
+                        [Highcharts] = "highchart4" 
+                        [options] = "chartOptions4" 
+                        [(update)]="updateFlag"
+
+                        style = "width: 100%; height: 220px; display: block; padding-top: 40px;">
+                      </highcharts-chart> -->
+                      <!-- <canvas *ngIf="showgraph == 'volume'"
+                      [datasets]='chartData'
+                      [labels]='chartLabels'
+                      [options]='chartcanvasOptions'
+                      [chartType]="'line'"
+                      [legend]="true"
+                      > -->
+                      <!-- </canvas> -->
+                      <div style="display: block;padding-top: 15px;" *ngIf="showgraph == 'volume'">
+                        <canvas baseChart
+                          [data]="floatVolumeBarChartData"
+                          [options]="floatVolumeChartOptions"
+                          width="800" height="295"
+                          ></canvas>
+                      </div>
+                      <!-- <canvas baseChart
+                          [data]="floatbarChartData"
+                          [options]="floatbarChartOptions"
+                          [plugins]="floatbarChartPlugins"
+                          [type]="'bar'"
+                          (chartHover)="chartHovered($event)"
+                          (chartClick)="chartClicked($event)">
+                        </canvas> -->
+                        <div style="display: block;padding-top: 15px;" *ngIf="showgraph == 'revenue'">
+                          <canvas baseChart
+                            [data]="floatRevenueBarChartData"
+                            [options]="floatRevenueChartOptions"
+                            width="800" height="295"
+                            ></canvas>
+                        </div>
+                      <!-- <highcharts-chart *ngIf="showgraph == 'revenue'"
+                      [Highcharts] = "highchart8" 
+                      [options] = "chartOptions8" 
+                      [(update)]="updateFlag"
+
+                      style = "width: 100%; height: 220px; display: block; padding-top: 40px;">
+                    </highcharts-chart> -->
+                    </div>
+                    </div>
+              </form>
+            </div>
+              <!-- Execution Data start from here -->
+              <div class="execution-data" *ngIf="execution">
+              
+                <!-- Grammage Table -->
+                  <div id="Grammage" class="simulator">
+                      <table class="simulator-data" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th colspan="1"> &nbsp;</th>   
+                              <th colspan="1">Pack Mix</th> 
+                              <th colspan="3">{{selectedDetails.category == "Beverages" ?  'Price Per Pack' : 'Grammage Pack'}}</th>
+                              <th *ngIf="distribution_type!='-1'" colspan="3">Distribution {{distribution_type != "-1.0" ? distribution_type: ''}}</th>
+                              <th *ngIf="current_trade!='-1.000'" colspan="3">DA%GR</th>
+                            </tr>
+                          </thead>
+                          
+                        <tbody>
+                            <tr class="sub-head">
+                              <td class="border-r"> {{selectedDetails.category == "Beverages" ?  'Pack Size' : 'Price Point'}}</td>
+
+                              <td class="border-r">Current Pack Level Standings</td>
+
+                              <td >Current Pack Level Standings</td>
+                              <td >Recommendations</td>
+                              <td class="border-r">Try your Scenario</td>
+
+                              <td  *ngIf="distribution_type!='-1'">Current Pack Level Standings</td>
+                              <td  *ngIf="distribution_type!='-1'">Recommendations</td>
+                              <td *ngIf="distribution_type!='-1'" class="border-r">Try your Scenario</td>
+
+                              <td  *ngIf="current_trade!='-1.000'" class="border-r">Current Pack Level Standings</td>
+                              <td  *ngIf="current_trade!='-1.000'">Recommendations</td>
+                              <td  *ngIf="current_trade!='-1.000'" class="border-r">Try your Scenario</td>
+                            </tr>
+                           
+                            <ng-container *ngFor="let p of execution_details[selectedBrand]" >
+                              <tr *ngIf="p.channel == selectedChannel">
+                                <td class="input-pp mt-b border-r">{{p.pack_name}}</td>
+  
+                                <td class="flex-a border-r"><div class="black">{{p.channel_pack_mix}}%</div> </td>
+  
+                                <td class="flex-a"><div class="black">{{selectedDetails.category == "Beverages" ? (p.pack_name != 'Total' ? p.current_price_per_pack:'') : (p.pack_name != 'Total' ? p.current_volume_per_pack: '')}}</div> </td>
+                                <td class="flex-a"><div class="blue">{{selectedDetails?.category == "Beverages" ? (p?.pack_name != 'Total' ? p?.recommendation_price_per_volume?.toFixed(2): '') :(p?.pack_name != 'Total' ?  p?.recommendation_volume_per_pack_volume?.toFixed(2):'')}}</div> </td>
+                                <td class="flex-a border-r"><input type="number" [readonly]="p.pack_name == 'Total' || p.status == '3' || p.status == 3" [(ngModel)]="p.digital_price_scenario" (ngModelChange)="onTryScenarioNew(p)" class="white try-scenario"></td>
+
+                                <td *ngIf="distribution_type!='-1'" class="flex-a"><div class="black">{{p.pack_name != 'Total' ? p.current_distribution: ''}}</div> </td>  
+                                <td *ngIf="distribution_type!='-1'" class="flex-a"><div class="blue">{{p.pack_name != 'Total' ? p.recommendation_distribution.toFixed(2): ''}}</div> </td>
+                                <td *ngIf="distribution_type!='-1'" class="flex-a border-r"><input  [readonly]="p.pack_name == 'Total' || p.status == '3' || p.status == 3" type="number" [(ngModel)]="p.digital_distribution_scenario" (ngModelChange)="onTryScenarioNew(p)" class="white try-scenario"></td>
+                                
+                                <td *ngIf="current_trade!='-1.000'" class="flex-a"><div class="black">{{p.pack_name == 'Total' ? p.current_trade: ''}}</div> </td>
+                                <td *ngIf="current_trade!='-1.000'" class="flex-a"><div class="blue">{{ p.pack_name == 'Total' ? p.recommendation_trade.toFixed(2): ''}}</div> </td>
+                                <td *ngIf="current_trade!='-1.000'" class="flex-a border-r"><input readonly type="number" [(ngModel)]="p.digital_trade_scenario" (ngModelChange)="onTryScenarioNew(p)" class="white try-scenario"></td>
+                              </tr>  
+                              
+                            </ng-container>
+
+                            
+                                                   
+                        </tbody>
+                      </table>
+                  </div>
+                  <!-- Distribution TDP Table -->
+                 
+              </div>
+           
+              <div [ngClass] = "'!model.Media && media' ? 'toggle-flex.media-toggle':'toggle-flex.pie-toggle'" class="toggle-flex media-toggle" *ngIf="selectedChannel != 'all'">
+                <div class="toggle-portfolio">Table</div>
+                <mat-slide-toggle #TV  [(ngModel)]="model.Media" name="Media"></mat-slide-toggle> 
+                <div class="toggle-brand">Chart</div>
+              </div>
+            <!-- Media Data start from here -->
+            <div class="execution-data" *ngIf="!model.Media && media">
+              <div id="A" class="simulator" >
+                <table width="200" class="simulator-data td-height">
+                    <thead>
+                      <tr>
+                        <th colspan="1"> &nbsp;</th>    
+                        <th colspan="1">Effectiveness</th>
+                        <th colspan="3" *ngIf="this.selectedMedia == 'TV' && hideShowTryScenarioSpendDigital.length>0">{{this.selectedMedia}} Spend</th>
+                        <th colspan="2" *ngIf="this.selectedMedia == 'TV' && hideShowTryScenarioSpendDigital.length === 0">{{this.selectedMedia}} Spend</th>
+                        <th colspan="2" *ngIf="this.selectedMedia == 'TV'">{{this.selectedMedia}} ROI</th>
+                        <th colspan="2" *ngIf="this.selectedMedia == 'TV'">{{this.selectedMedia}} VOL Contribution</th>
+                        <th colspan="3" *ngIf="this.selectedMedia == 'TV'">{{this.selectedMedia}} GRP</th>
+
+
+                        <th colspan="2" *ngIf="this.selectedMedia == 'Digital'">{{this.selectedMedia}} GRP</th>
+                        <th colspan="2" *ngIf="this.selectedMedia == 'Digital'">{{this.selectedMedia}} VOL Contribution</th>
+                        <th colspan="3" *ngIf="this.selectedMedia == 'Digital'">{{this.selectedMedia}} Spend</th>
+                        <!-- <th colspan="2" *ngIf="this.selectedMedia == 'Digital'">{{this.selectedMedia}} ROI</th> -->
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr [ngClass]="selectedMedia === 'TV'? 'sub-head mh' : 'dig-sub-head mh'" >
+                        <td class="tablerowheader" height="45"> </td> 
+
+                        <td class="tablerowheader"></td>
+
+                        <td class="tablerowheadercurrent" *ngIf ="this.selectedMedia === 'TV'">Current Standings($K)</td>
+                        <td class="tablerowheader" *ngIf ="this.selectedMedia === 'TV'">Recommen dations($K)</td>
+                        <td class="tablerowheadercurrent" *ngIf ="hideShowTryScenarioSpendDigital.length>0 && this.selectedMedia === 'TV'">Try your Scenario($K)</td>
+                        <!-- <td class="tablerowheadercurrent" *ngIf ="this.selectedMedia === 'Digital'">Try your Scenario($K)</td> -->
+
+                        
+
+                        <td class="tablerowheadercurrent" >Current Standings</td>
+                        <td class="tablerowheader">Recommen dations</td>
+                        <td class="tablerowheadercurrent" *ngIf ="hideTryScenarioTv.length>0" >Try your Scenario</td>
+                        
+
+                        <td class="tablerowheadercurrent">Current Standings</td>
+                        <td class="tablerowheader">Recommen dations</td>
+
+                        <td class="tablerowheadercurrent" *ngIf="this.selectedMedia == 'TV'">Current Standings</td>
+                        <td class="tablerowheader" *ngIf="this.selectedMedia == 'TV'">Recommen dations</td>
+                        <td class="tablerowheadercurrent" *ngIf="this.selectedMedia == 'TV'">Try your Scenario</td>
+                       
+                        <td class="tablerowheadercurrent" *ngIf ="this.selectedMedia === 'Digital'">Current Standings($K)</td>
+                        <td class="tablerowheader" *ngIf ="this.selectedMedia === 'Digital'">Recommen dations($K)</td>
+                        <td class="tablerowheadercurrent" *ngIf ="this.selectedMedia === 'Digital'">Try your Scenario($K)</td>
+
+                      </tr>
+                      <ng-container *ngFor="let m of media_details[selectedBrand]" >
+
+                        <tr class="t-data" *ngIf="m.media_type == 'TV' && selectedMedia=='TV'">
+                            <td class="mheading border-r">{{m.genre_platform}}</td> 
+
+                          <td class="flex-a border-r"><div class="black">{{m.current_effectiveness_per_unit}}</div></td> 
+
+                          <td class="flex-a"><div class="black">{{(m.current_spends/1000).toFixed(0)}}</div> </td> 
+                          <td [ngClass]="m.scenerio_spends_digital ? 'flex-a' : 'flex-a border-r'"><div class="blue">{{m.genre_platform == 'Total' ? (m.recommendation_spends/1000).toFixed(0) : (m.recommendation_spends/1000).toFixed(0)}}</div> </td> 
+                          <td *ngIf = "m.scenerio_spends_digital" class="flex-a border-r" ><div class="grey" >{{m.scenerio_spends_digital != "" ? (m.scenerio_spends_digital/1000).toFixed(0) : ""}}</div></td>
+
+                          
+
+                          <td class="flex-a"><div class="black">{{(m.current_volume/1000).toFixed(1)}}</div> </td> 
+                          <td [ngClass]="m.try_scenario_vol ? 'flex-a' : 'flex-a border-r'"><div  class="blue">{{m.genre_platform == 'Total' ? (m.recommendation_volume/1000).toFixed(1) : (m.recommendation_volume/1000).toFixed(1)}}</div> </td> 
+                          <td *ngIf ="m.try_scenario_vol" class="flex-a border-r"><div class="grey" >{{m.try_scenario_vol != "" ? (m.try_scenario_vol/1000).toFixed(1) : ""}}</div></td>
+
+
+                          <td class="flex-a"><div class="black">{{m.current_roi.toFixed(1)}}</div> </td> 
+                          <td class="flex-a border-r"><div class="blue">{{m.genre_platform == 'Total' ? m.recommendation_roi.toFixed(1): m.recommendation_roi.toFixed(1)}}</div> </td> 
+                        
+                          <td class="flex-a" *ngIf="this.selectedMedia == 'TV'"><div class="black">{{m.current_metric_value.toFixed(0)}}</div> </td> 
+                          <td class="flex-a" *ngIf="this.selectedMedia == 'TV'"><div class="blue">{{m.genre_platform == 'Total' ? m.recommendation_metric_value.toFixed(0) : m.recommendation_metric_value.toFixed(0)}}</div> </td> 
+                          <td class="flex-a border-r" *ngIf="this.selectedMedia == 'TV'"><input type="number" [readonly]="m.genre_platform == 'Total' || m.status == '3' || m.status == 3" [(ngModel)]="m.scenerio_metric_value" (ngModelChange)="onTryScenarioNew(m)" class="white try-scenario"></td> 
+                        </tr> 
+                        </ng-container>
+                        <ng-container *ngFor="let m of media_details[selectedBrand]" >
+
+                        <tr class="t-data" *ngIf="m.media_type == 'Digital' && selectedMedia=='Digital'">
+                          <td class="mheading border-r">{{m.genre_platform}}</td> 
+
+                        <td class="flex-a border-r"><div class="black">{{m.current_effectiveness_per_unit}}</div></td> 
+
+                        
+
+                        <td class="flex-a"><div class="black">{{(m.current_volume/1000).toFixed(1)}}</div> </td> 
+                        <td class="flex-a" [ngClass]="m.try_scenario_vol ? 'flex-a ' : 'flex-a border-r'"><div  class="blue">{{m.genre_platform == 'Total' ? (m.recommendation_volume/1000).toFixed(1) : (m.recommendation_volume/1000).toFixed(1)}}</div> </td> 
+                        <td *ngIf = "m.try_scenario_vol" class="flex-a border-r" ><div class="grey" >{{m.try_scenario_vol != "" ? (m.try_scenario_vol/1000).toFixed(1) : ""}}</div></td>
+
+                        <td class="flex-a"><div class="black">{{m.current_roi.toFixed(1)}}</div> </td> 
+                        <td class="flex-a border-r"><div class="blue">{{m.genre_platform == 'Total' ? m.recommendation_roi.toFixed(1): m.recommendation_roi.toFixed(1)}}</div> </td> 
+                      
+                        <td class="flex-a"><div class="black">{{(m.current_spends/1000).toFixed(0)}}</div> </td> 
+                        <td class="flex-a"><div class="blue">{{m.genre_platform == 'Total' ? (m.recommendation_spends/1000).toFixed(0) : (m.recommendation_spends/1000).toFixed(0)}}</div> </td> 
+                        <td class="flex-a border-r"><input type="number" [readonly]="m.genre_platform == 'Total' || m.status == '3' || m.status == 3" [(ngModel)]="m.scenerio_spends_digital" (ngModelChange)="onTryScenarioNew(m.try_scenario)" class="white try-scenario"></td> 
+                      </tr> 
+                 
+                      </ng-container>
+           
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-md-12" class="grp-graph-section" *ngIf="model.Media">
+              <div class="header-graph-logo">
+                <div class="row">
+                <p class= "col-lg-6 col-md-6" style="color:white;margin-top:5px">{{this.selectedMedia}} Spend </p>
+                <p  class= "col-lg-6 col-md-6" style="color:white;margin-top: 5px;">{{this.selectedMedia}} GRP </p>
+              </div>
+            </div>
+              <div class="row">
+              <div class="col-md-6" style=" width:500px;padding-top: 30px;">
+                <canvas baseChart
+                [data]="pieSpendChartData"
+                [options]="pieSpendChartOptions"
+                [type]="doughnutChartType"
+                width="600" height="295"
+                ></canvas>
+                <!-- <highcharts-chart
+                 [Highcharts] = "highcharts5" 
+                 [options] = "chartOptions5" 
+                 style = "width: 100%; height: 300px;">
+                </highcharts-chart> -->
+              </div>
+              <div class="col-md-6" style="width:500px;padding-top: 30px;">
+                <canvas baseChart 
+                [data]="pieGrpChartData"
+                [options]="pieGrpChartOptions"
+                [type]="doughnutChartType"
+                [plugins]="doughnutChartPlugins"
+                width="600" height="295"
+                ></canvas>
+                <!-- <highcharts-chart
+                  [Highcharts] = "highcharts6" 
+                  [options] = "chartOptions6" 
+                  style = "width: 100%; height: 300px;">
+                </highcharts-chart> -->
+              </div>
+              </div>
+            </div>
+</div>
+</div>
+
+ 
+              

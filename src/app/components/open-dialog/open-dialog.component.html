@@ -1,0 +1,22 @@
+
+<!-- <button mat-button (click)="openDialog()">Launch dialog</button> -->
+
+
+<h1 mat-dialog-title>Save Scenario</h1>
+<div mat-dialog-content>This Scenario file will be automatically saved and added to scenario comparison.</div>
+<br>
+
+<input type="text" required [(ngModel)]="scenario_name" name="scenario_name"
+  style="padding:12px 20px; 
+  border-style:solid;
+  border-radius:calc(var(--border-radius) * 1px);" placeholder="Enter Scenario name">
+
+<div mat-dialog-actions>
+  <button class="save" mat-button (click)="saveScenario()">Save</button>
+  <button class="cancel" mat-button mat-dialog-close>Cancel</button>
+</div>
+
+<br>
+<div *ngIf="enter_scenario" class="alert alert-danger">
+  <h6>Please enter Campaign name.</h6>           
+</div>

@@ -1,0 +1,36 @@
+img.logo-icon{
+    width: 30px;
+    padding-right: 8px;
+}
+.top-navbar{
+    margin: 10px 10px;
+}
+.navbar-button{
+    width: 170px;
+    font-size: 15px;
+    margin: 0 10px;
+    padding: 0px 0px 9px 0px;
+    border: solid 1px #ccc;
+    border-radius: 6px;
+    height: 45px;
+}
+.btn-blue {
+    background-color: #0272d5;
+    color: #fff;
+}
+.btn-green {
+    background-color: #16c81d;
+    color: #fff;
+}
+.mat-icon{
+    position: relative;
+    left: -10px;
+    font-size: 26px;
+    top: 8px;
+}
+.mat-form-field{
+    width: 220px;
+    margin-right: 20px;
+}
+
+    

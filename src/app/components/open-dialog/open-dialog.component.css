@@ -1,0 +1,12 @@
+.mat-dialog-container{
+    text-align: center!important;
+}
+.save{
+    background: #0272d5;
+    color: #fff;
+    width: 150px;
+}
+.cancel{
+    background-color: #ccc;
+    width: 150px;
+}

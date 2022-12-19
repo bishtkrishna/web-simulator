@@ -1,0 +1,237 @@
+<div class="container-fluid">
+    <div class="row"> 
+      <nav aria-label="breadcrumb" style="background: #efeeee;width: 100%;height: 40px;">
+        <ol class="breadcrumb" style="padding: 0.6rem;">
+          <button style="width: 40px;
+    height: 28px;
+    border: transparent;
+     display: flex; font-style: bold;" (click)="back()" ><span class="material-icons">arrow_back</span></button>
+          <li style = "margin-left: 10px;" class="breadcrumb-item" (click)="navToScenario()">Home</li>
+          <li class="breadcrumb-item"  [routerLink]="['/simulator']">{{selectedDetails.name}}</li>
+          <li class="breadcrumb-item active" aria-current="page">Compare</li>
+        </ol>
+      </nav>
+        <div class="col-lg-12 col-md-12">
+            <div class="top-navbar">
+              <mat-form-field>
+                <mat-label>Brand</mat-label>
+                <mat-select [(value)]="selectedBrand">
+                  <mat-option [value]="b" (click)="selectBrand(b)" *ngFor="let b of brand_list">
+                    <img class="logo-icon" src="../../../assets/images/pepsi_icon.png">{{ b }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            <!-- <mat-form-field>
+                <mat-select placeholder="Brand">
+                  <mat-select-trigger>
+                    <img class="logo-icon" src="../../../assets/images/pepsi_icon.png"> Pepsi
+                  </mat-select-trigger>
+                </mat-select>
+              </mat-form-field> -->
+              <mat-form-field>
+                <mat-label>Execution</mat-label>
+                <mat-select [(value)]="selectedChannel">
+                  <mat-option [value]="channel.channel" (click)="onExecution(channel.channel)" *ngFor="let channel of channels">{{ channel.channel }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+               <mat-form-field>
+                <mat-label>Media</mat-label>
+
+                <mat-select [(value)]=selectedMedia>
+                  <mat-option value="TV" (click)="onMediaChange('TV')">
+                   TV
+                  </mat-option>
+                  <mat-option value="Digital" (click)="onMediaChange('Digital')">
+                   Digital
+                   </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Scenarios</mat-label>
+                <mat-select [(ngModel)]="selectedScenario" multiple>
+                  <mat-option *ngFor="let scenario of scenarios; index as i" (onSelectionChange)="scenarioChecked($event)" [value]="scenario.scenario_name"><span [ngClass]="scenario.status == 3 ? 'green' : ''">{{scenario.scenario_name}} (S{{i+1}})</span></mat-option>
+                </mat-select>
+              </mat-form-field>
+
+             
+                <button class="navbar-button btn-green" (click)="downloadData();"><mat-icon>get_app</mat-icon>Download</button>
+                <button class="navbar-button btn-green" *ngIf="simulation_status != '3'" (click)="openDialog()"><mat-icon>check</mat-icon>Complete</button>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 top">
+
+              <!-- <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <button style="width: 40px;
+            height: 30px;
+            border: transparent;
+             display: flex; font-style: bold;" (click)="back()" ><span class="material-icons">arrow_back</span></button>
+                  <li style = "margin-left: 10px;" class="breadcrumb-item" [routerLink]="['/new_scenario']">Home</li>
+                  <li class="breadcrumb-item" [routerLink]="['/simulator']">{{selectedDetails.name}}</li>
+                  <li class="breadcrumb-item active" aria-current="page">Compare</li>
+                </ol>
+              </nav> -->
+              <div _ngcontent-wsl-c150="" class="graph-heading"></div>
+              <div class="toggle-flex" *ngIf="brand_list.length > 1">
+                <div class="toggle-portfolio">Portfolio</div>
+                <mat-slide-toggle #ExeCution  [(ngModel)]="model.ifPrint" name="ExeCution"></mat-slide-toggle> 
+                <!-- {{model.ifPrint}} --> <div  class="toggle-brand">Brand <img *ngIf="!model.ifPrint" class="logo-brand" src="../../../assets/images/pepsi_icon.png"></div></div>
+                <div *ngIf="display_result" [ngClass]="model.ifPrint === true ? 'brandVolume' : 'portfolioVolume'">
+                <div class="brand-graph">
+                  <canvas baseChart
+                  [data]="barChartData"
+                  [options]="barChartOptions"
+                  height="205"
+                  >
+              </canvas>
+                  <!-- <highcharts-chart
+                  [Highcharts] = "Highcharts" 
+                  [options] = "chartOptions" 
+                  [(update)]="updateFlag" 
+                  style = "width: 100%; height: 200px; display: block; position: relative; right: 20px;">
+                </highcharts-chart> -->
+                <!-- <hr  class="belowgraph_hr"> -->
+                </div>
+                <div class="brand-graph">
+                  <canvas baseChart 
+                        [data]="spengraphdata"
+                        [options]="spengraphOptions"
+                        height="205"></canvas>
+                  <!-- <highcharts-chart
+                    [Highcharts] = "highchart2" 
+                    [options] = "chartOptions2" 
+                    [(update)]="updateFlag" 
+                    style = "width: 100%; height: 220px; display: block;">
+                  </highcharts-chart> -->
+                </div>
+                <div class="brand-graph">
+                  <canvas baseChart
+                            [data]="roigrphChartData"
+                            [options]="roigraphOptions"
+                            height="205"
+                            >
+                        </canvas>
+                  <!-- <highcharts-chart
+                    [Highcharts] = "highchart3" 
+                    [options] = "chartOptions3" 
+                    [(update)]="updateFlag" 
+                    style = "width: 100%; height: 220px; display: block;">
+                  </highcharts-chart> -->
+                </div>
+              <div class="volume-brand-graph">
+                <select #selectList [(ngModel)]="selectedClickedScenario" (change)="ChangeVolumeDueCharts(selectList.value)"style="width:150px;height:25px;float: right;"> 
+                  <option [value]="scenario" *ngFor="let scenario of checkedScenarios; index as i" >{{scenario}}
+                  </option> 
+                </select>
+                <!-- <mat-radio-group [value]="showgraph"  aria-label="Select an option">
+                  <mat-radio-button value="volume" (change)="graphChange($event)">Volume Due to</mat-radio-button>
+                  <mat-radio-button value="revenue" (change)="graphChange($event)">Icremental Revenue</mat-radio-button>
+                </mat-radio-group>  -->
+                <div style="display: block;padding-top: 15px;" *ngIf="showgraph == 'volume'">
+                  <canvas baseChart
+                    [data]="floatVolumeBarChartData"
+                    [options]="floatVolumeChartOptions"
+                    width="800" height="295"
+                    ></canvas>
+                </div>
+                <!-- <highcharts-chart *ngIf="showgraph == 'volume'"
+                  [Highcharts] = "highchart4" 
+                  [options] = "chartOptions4" 
+                  [(update)]="updateFlag" 
+                  style = "width: 100%; height: 220px; display: block; padding-top: 40px;">
+                </highcharts-chart> -->
+
+                <div style="display: block;padding-top: 15px;" *ngIf="showgraph == 'revenue'">
+                  <canvas baseChart
+                    [data]="floatRevenueBarChartData"
+                    [options]="floatRevenueChartOptions"
+                    width="800" height="295"
+                    ></canvas>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="compare-table" *ngIf="execution">
+              <div id="Grammage" class="simulator">
+                <table class="simulator-data" style="width:100%">
+              <!-- <div id="A" class="simulator">
+                <table width="230" class="simulator-data"> -->
+                  <thead>
+                        <tr>
+                            <th class="fs" style="padding: 0px 30px;color: #ffffff;">Input</th>
+                            <th style="color: #ffffff;" [attr.colspan]="selectedScenarioClone.length + 1">{{selectedDetails.category == "Beverages" ?  'Price Per Pack' : 'Grammage Pack'}}</th>
+                            <th style="color: #ffffff;" [attr.colspan]="selectedScenarioClone.length + 1">Distribution {{distribution_type != "-1.0" ? distribution_type: ''}}</th>
+                            <th style="color: #ffffff;" [attr.colspan]="selectedScenarioClone.length + 1">DA%GR</th>
+                          </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let p of exec_data_for_table" >
+                        <tr  class="t-data" >
+
+                          <td class="mheading border-r"><b>{{ p.pack}}</b></td>
+
+                          <td class="pl-5"><span>BASE</span><div class="inputs-d gray">{{(p.base.grammage/1).toFixed(2)}}</div></td>
+                          <ng-container *ngFor="let s of selectedScenarioClone" >
+                            <td><span>{{s}}</span><div class="inputs-d blue">{{(p[s].grammage/1).toFixed(2)}}</div></td>
+                          </ng-container>
+
+                          <td class="pl-5"><span>BASE</span><div class="inputs-d gray">{{(p.base.distribution/1).toFixed(2)}}</div></td>
+                          <ng-container *ngFor="let s of selectedScenarioClone" >
+                            <td><span>{{s}}</span><div class="inputs-d blue">{{(p[s].distribution/1).toFixed(2)}}</div></td>
+                          </ng-container>
+
+                          <td  class="pl-5"><span>BASE</span><div class="inputs-d gray">{{(p.base.da_gr/1).toFixed(2)}}</div></td>
+                          <ng-container *ngFor="let s of selectedScenarioClone" >
+                            <td ><span>{{s}}</span><div class="inputs-d blue">{{(p[s].da_gr/1).toFixed(2)}}</div></td>
+                          </ng-container>
+        
+                         
+                        </tr>                          
+                      </ng-container>
+                    </tbody>
+                </table> 
+              </div>
+            </div>
+
+            <div class="compare-table" *ngIf="media">
+              <div id="A" class="simulator">
+                <table width="230" class="simulator-data">
+                    <thead>
+                      <tr>
+                        <th class="fs" style="padding: 0px 30px;color: #ffffff;">Input</th>
+                        <th style="color: #ffffff;" [attr.colspan]="selectedScenarioClone.length + 1">{{selectedMedia}} Spend	</th>
+                        <th style="color: #ffffff;" [attr.colspan]="selectedScenarioClone.length + 1">{{selectedMedia}} GRP	</th>
+                        <th style="color: #ffffff;" [attr.colspan]="selectedScenarioClone.length + 1">{{selectedMedia}} Vol	</th>
+                       
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <ng-container *ngFor="let m of data_for_table" >
+                      <tr class="t-data" >
+                        <td class="mheading border-r">{{m.genre}}</td>
+                          <td class="pl-5"><span>BASE</span><div class="inputs-d gray">{{(m.base.spends/1000).toFixed(0)}}</div></td>
+                          <ng-container *ngFor="let s of selectedScenarioClone" >
+                            <td><span>{{s}}</span><div class="inputs-d blue">{{(m[s].spends/1000).toFixed(0)}}</div></td>
+                          </ng-container>
+
+                          <td class="pl-5"><span>BASE</span><div class="inputs-d gray">{{(m.base.grp/1).toFixed(0)}}</div></td>
+                          <ng-container *ngFor="let s of selectedScenarioClone" >
+                            <td><span>{{s}}</span><div class="inputs-d blue">{{(m[s].grp/1).toFixed(0)}}</div></td>
+                          </ng-container>
+
+                          <td class="pl-5"><span>BASE</span><div class="inputs-d gray">{{(m.base.vol/1000).toFixed(1)}}</div></td>
+                          <ng-container *ngFor="let s of selectedScenarioClone" >
+                            <td><span>{{s}}</span><div class="inputs-d blue">{{(m[s].vol/1000).toFixed(1)}}</div></td>
+                          </ng-container>
+                      </tr> 
+                    </ng-container>
+              
+                  </tbody>
+                </table>
+              </div>
+            
+            </div>
+        </div>
+    </div>
+</div>

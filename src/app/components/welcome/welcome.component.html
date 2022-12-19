@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+          <div class="login-welcome">
+              <div class="login-logo"><img src="assets/images/CEMainLogo.png"></div>
+              <form class="login-form" [formGroup]="loginForm" (ngSubmit)="loginSubmit()" *ngIf="register">
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Email is required</div>
+                      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Enter your password</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'"  formControlName="password">
+                      <button class="view-btn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                    </mat-form-field>
+                    <button class="login-btn" type="submit">Log In</button>
+                    <button class="register" [routerLink]="['/register']">Register</button>
+                </form>
+
+                <form class="login-form" [formGroup]="registerForm" (ngSubmit)="registerSubmit()" *ngIf="!register">
+                  <mat-form-field appearance="fill">
+                      <mat-label>Name</mat-label>
+                      <input type="name" matInput placeholder="Enter your name" formControlName="username">
+                    </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+                    <div *ngIf="submitted && r.email.errors" class="invalid-feedback">
+                      <div *ngIf="r.email.errors.required">Email is required</div>
+                      <div *ngIf="r.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                    
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Enter your password</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                      <button class="view-btn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Confirm password</mat-label>
+                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmpassword">
+                      <button class="view-btn" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                    <button class="login-btn" type="submit">Register</button>
+                </form>
+          </div>
+  </div>
+</div>
+
+<!-- <p>welcome works!</p>
+<button class="btn-login" [routerLink]="['/scenario']">Login</button>
+<button class="create-account" [routerLink]="['']">Register</button> -->

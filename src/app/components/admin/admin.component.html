@@ -1,0 +1,183 @@
+<div>
+    <div class="row m-0 p-0">
+        <!-- <div class="header-logo">
+            <img src="assets/images/header_logo.jpg" style="position: relative;
+          top: -5px;float: left;"><span style="color:white;float: left;">| SimulatorMigration </span>
+        </div> -->
+    </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <button style="width: 40px;
+              height: 30px;
+              border: transparent;
+               display: flex; font-style: bold;" (click)="back()" ><span class="material-icons">arrow_back</span></button>
+          <li class="breadcrumb-item" style="margin-left: 10px;" >
+            <a [href]="['/scenario']">Home</a> 
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Admin</li>
+        </ol>
+      </nav>
+    <div style="padding: 0px 10px 0px 10px;">
+        <div class="row m-0 p-0">
+            <div class="col-md-4 col-lg-4">
+                <div style="padding: 30px;">
+                    <div class="row">
+                        <span class="material-icons" style="font-size: 40px;">person</span>
+                        <button class="adminbtn">Admin</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div>
+            <span class="adminname"> Good Morning, Karen Woolery</span>
+        </div> -->
+        <div class="row m-0 p-0">
+            <div class="col-md-6 col-lg-6" >
+                <span class="adminname"> Good Morning, Karen Woolery</span>
+            </div>
+            <!-- <div class="col-md-5 col-lg-5" style="padding: 20px;">
+                <div class="simulatortxt">
+                    <span class="simulatortxtspan">
+                <span class='material-icons' style="font-size: 24px;padding-top: 10px">check_box</span>
+                        <span style="font-size: 24px;"> {{uploadS.length}}</span> Scenarios Completed | <span
+                            class="material-icons">hourglass_top</span> <span> {{this.archivals.length}} </span>
+                        Scenarios pending</span>
+
+                </div>
+            </div> -->
+            <!-- <div class="col-md-2 col-lg-2"></div> -->
+            <div class="col-md-6 col-lg-6" >
+                <!-- <button mat-stroked-button color="primary">Archive</button> -->
+                <div class="row m-0 p-0">
+                    <form action="/form/submit" method="get" style="padding-top: 3px;">
+                        <label for="upload" class="uploadsample">Upload </label>
+                        <input type="file" id="upload" (change)="addfile($event)" [formControl]="uploaddoc" value="Upload" accept=".xlsx, .xls">
+                    </form>
+                    <a href="assets/sample.xlsx" class="btn btn-default" target="_blank"
+                        download="Sample_template.xlsx">
+                        <button mat-stroked-button class="dnwldsample">
+                            <!-- <mat-icon>download</mat-icon> -->
+                            Download Sample
+                        </button>
+                    </a>
+                    <button class="archivebtn" 
+                mat-stroked-button (click)="showArchiveUploads()">{{btnName}}</button>
+                    <!-- <button class="archivebtn" color="primary" *ngIf = "selection.selected.length>0" 
+                mat-stroked-button (click)="archive()">Archive</button> -->
+                <!-- <div style="padding-left: 15px;">
+                <button *ngIf = "selection.selected.length>0" mat-raised-button class="archieHidebtn" color="primary" (click)="archive()">Archive</button>
+            </div> -->
+                </div>
+            </div>
+        </div>
+        <div *ngIf = "selection.selected.length>0" class="row m-0 p-0" >
+            <button mat-raised-button class="archieHidebtn" color="primary" (click)="archive()"  style="margin-left:auto;display:block;margin-right: 100px;"
+                >Archive</button>
+            </div>
+        <div style="padding-top:30px ;">  
+        <div class="row m-0 p-0" style="border: 1px solid;">
+
+            <div class="col-md-12 col-lg-12">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id"
+                    matSortDisableClear matSortDirection="asc" #sort="matSort">
+
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select" *ngIf ="btnName === 'Show Archives'">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+
+                    <!-- Id Column -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Upload Id </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+                    <!-- userId Column -->
+                    <ng-container matColumnDef="user_id">
+                        <th mat-header-cell *matHeaderCellDef > User Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.user_id}} </td>
+                    </ng-container>
+
+                    <!-- name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef>Upload Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <!-- uploadId Column -->
+                    <ng-container matColumnDef="upload_id">
+                        <th mat-header-cell *matHeaderCellDef> Upload Id </th>
+                        <td mat-cell *matCellDef="let element"> {{element.upload_id}} </td>
+                    </ng-container>
+
+                    <!-- Created Column -->
+                    <ng-container matColumnDef="created_at">
+                        <th mat-header-cell *matHeaderCellDef> Created </th>
+                        <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+                    </ng-container>
+
+                    <!-- Brand Column -->
+                    <ng-container matColumnDef="updated_at">
+                        <th mat-header-cell *matHeaderCellDef> Updated </th>
+                        <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+                    </ng-container>
+
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="compt"> ● {{element.status == 1?' Completed':'Pending'}} </div>
+                        </td>
+                    </ng-container>
+                    <!-- Modified Column -->
+                    <ng-container matColumnDef="download">
+                        <th mat-header-cell *matHeaderCellDef> Download </th>
+                        <td mat-cell *matCellDef="let element">
+
+                            <button mat-button>
+                                <mat-icon (click)="downloadExcel(element)">download</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <!-- Ctrated By Column -->
+                    <ng-container matColumnDef="uploadfile">
+                        <th mat-header-cell *matHeaderCellDef> File Name </th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.uploadfile}}
+                        </td>
+                    </ng-container>
+
+                    <!-- <ng-container  [ngIf]="dataSource.data.length === 0" matColumnDef="noRecord">
+                <td mat-footer-cell *matFooterCellDef>No records found.</td>
+          </ng-container> -->
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <!-- <tr mat-footer-row *matFooterRowDef="['noRecord']"></tr> -->
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </tr>
+                    
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+</div>

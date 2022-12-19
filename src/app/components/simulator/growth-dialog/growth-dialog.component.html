@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>{{data.message}}</h1>
+<div mat-dialog-content *ngIf = "!data.tryscenario">
+    <b>{{data.growth_achieved}}%</b>
+</div>
+<div mat-dialog-actions>
+    <div *ngIf = "!data.tryscenario">
+        <button mat-button color="primary" (click)="onNoClick()" >Ok</button>
+    </div>
+    <div *ngIf = "data.tryscenario">
+        <button mat-button color="primary" (click)="onYesClick()" >Yes</button>
+        <button mat-button color="primary" (click)="onNoSaveClick()" >No</button>
+    </div>
+</div>

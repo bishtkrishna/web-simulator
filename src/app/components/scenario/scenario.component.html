@@ -1,0 +1,194 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- <div class="header-logo">
+      <img src="assets/images/header_logo.jpg" style="position: relative;
+        top: -5px;"><span style="color:white">Canvas/Business Simulator </span>
+    </div> -->
+    <div class="col-md-3 col-lg-3">
+      <div class="filter-panel">
+        <h4>Filter Panel</h4>
+        <form class="scenario-from">
+          <mat-form-field class="search-bar">
+            <span matPrefix> </span>
+            <input type="tel" matInput placeholder="Search" name="search" [(ngModel)]="search" (keyup)="applyFilter($event)">
+            <button matSuffix mat-button>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Brand</mat-label>
+            <mat-select [formControl]="brand" multiple (ngModelChange)="filterPanel();">
+              <mat-select-trigger>
+                {{brand.value ? brand.value[0] : ''}}
+                <span *ngIf="brand.value?.length > 1" class="example-additional-selection">
+                  (+{{brand.value.length - 1}} {{brand.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let brand of brandList" [value]="brand">{{brand}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Status</mat-label>
+            <mat-select [formControl]="status" multiple (ngModelChange)="filterPanel();">
+              <mat-select-trigger>
+                {{status.value ? status.value[0] : ''}}
+                <span *ngIf="status.value?.length > 1" class="example-additional-selection">
+                  (+{{status.value.length - 1}} {{status.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let status of statusList" [value]="status.status">{{status.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Market</mat-label>
+            <mat-select [formControl]="market" multiple (ngModelChange)="filterPanel();">
+              <mat-select-trigger>
+                {{market.value ? market.value[0] : ''}}
+                <span *ngIf="market.value?.length > 1" class="example-additional-selection">
+                  (+{{market.value.length - 1}} {{market.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let market of marketList" [value]="market">{{market}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Select Category</mat-label>
+            <mat-select [formControl]="category" multiple (ngModelChange)="filterPanel();">
+              <mat-select-trigger>
+                {{category.value ? category.value[0] : ''}}
+                <span *ngIf="category.value?.length > 1" class="example-additional-selection">
+                  (+{{category.value.length - 1}} {{category.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let category of categoryList" [value]="category">{{category}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Created By</mat-label>
+            <mat-select [formControl]="user" multiple (ngModelChange)="filterPanel();">
+              <mat-select-trigger>
+                {{user.value ? user.value[0] : ''}}
+                <span *ngIf="user.value?.length > 1" class="example-additional-selection">
+                  (+{{user.value.length - 1}} {{user.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let user of userList" [value]="user.id">{{user.username}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-9 col-lg-9">
+      <div class="samulation-panel">
+        <div class="row">
+          <div class="col-md-4 col-lg-4">
+            <div class="samulation-title">Simulations</div>
+          </div>
+          <div class="col-md-8 col-lg-8 top-btn">
+            <button mat-stroked-button color="primary" (click)="duplicate();">Duplicate</button>
+            <button mat-stroked-button color="primary" (click)="archive();">Archive</button>
+            <button mat-raised-button color="primary" [routerLink]="['/new_scenario']">New Simulation</button>
+            <button mat-raised-button color="primary" [routerLink]="['/admin']">Admin</button>
+          </div>
+        </div>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="id"
+        matSortDisableClear matSortDirection="asc" #sort="matSort">
+
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Simulator ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Market Column -->
+          <ng-container matColumnDef="market">
+            <th mat-header-cell *matHeaderCellDef> Market </th>
+            <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+          </ng-container>
+
+          <!-- Category Column -->
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+          </ng-container>
+
+          <!-- Created Column -->
+          <ng-container matColumnDef="created">
+            <th mat-header-cell *matHeaderCellDef> Created </th>
+            <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+          </ng-container>
+
+           <!-- Modified Column -->
+           <ng-container matColumnDef="modified">
+            <th mat-header-cell *matHeaderCellDef> Modified </th>
+            <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+          </ng-container>
+
+          <!-- Brand Column -->
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef> Brand </th>
+            <td mat-cell *matCellDef="let element"> {{element.brand_name}} </td>
+          </ng-container>
+
+          <!-- Status Column -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element">
+              <div class="draft" *ngIf="element.status == 1"> ● {{'In Draft'}} </div>
+              <div class="inprogress" *ngIf="element.status == 2"> ● {{'In progress'}} </div>
+              <div class="compt" *ngIf="element.status == '3'"> ● {{'Completed'}} </div>
+              <div class="archive" *ngIf="element.status == 4"> ● {{'Archived'}} </div>
+              <div class="archive" *ngIf="element.status == 5"> ● {{'Error'}} </div>
+            </td>
+          </ng-container>
+
+          <!-- Ctrated By Column -->
+          <ng-container matColumnDef="createdby">
+            <th mat-header-cell *matHeaderCellDef> Created By </th>
+            <td mat-cell *matCellDef="let element"><img src="assets/images/profile-icon.jpg" class="profile">
+              <div class="AF">{{element.createdby}}</div>
+            </td>
+          </ng-container>
+
+          <!-- Modified Column -->
+          <ng-container matColumnDef="view_details">
+            <th mat-header-cell *matHeaderCellDef> View Details </th>
+            <td mat-cell *matCellDef="let element"><button mat-stroked-button color="primary"
+                (click)=viewDetails(element.id)>View</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+          </tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

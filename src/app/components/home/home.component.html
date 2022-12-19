@@ -1,0 +1,162 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="header-logo">
+            <div class="left-top-filter" *ngIf="showMenuItem">
+                <div class="btn"
+                    (click)="showDiv.Mfilter = !showDiv.Mfilter;showDiv.MediaFilter = false;showDiv.tvFilter = false;">
+                    <mat-icon class="dialpad"> view_headline</mat-icon>
+                </div>
+                <!-- Top Filter start from here -->
+
+                <div class="filter-cont" *ngIf="showDiv.Mfilter">
+    <div class="filter-title">
+      <img src="../../../assets/images/filter_icon.jpg"> <span>Growth</span>
+    </div>
+      <div class="growth-sec">
+        <div class="g-input">
+          <label>Growth Ambition</label>
+        
+        <div class="input-group-append">
+          <input type="text" class="form-control input-append" placeholder="0" [(ngModel)]="growthAmbition" disabled>
+          <span class="input-group-text input-align">%</span>
+        </div>
+        </div>
+        <div class="g-volume">
+          <span class="Vname">Current Volume</span>
+        <span class="Vdata">{{total_volume[selectedBrand]}}M</span>
+        </div>
+      </div>
+      <div class="filter-title">
+        <img src="../../../assets/images/filter_icon.jpg"> <span>Trade</span>
+      </div>
+      <div class="growth-sec">
+        <div class="g-input">
+          <label>Max Trade</label>              
+        <div class="input-group-append">
+          <input type="text" class="form-control input-append" placeholder="0" disabled>
+          <span class="input-group-text input-align">{{input_values_by_brand[selectedBrand].max_trade}}%</span>
+        </div>
+        </div>
+        <div class="g-volume">
+          <span class="Vname">Current DA</span>
+        <span class="Vdata">{{input_values_by_brand[selectedBrand].current_da}}%</span>
+        </div>
+      </div>
+      <div class="filter-title">
+        <img src="../../../assets/images/filter_icon.jpg"> <span>TV</span>
+        <div class="subside-filter"
+              (click)="showDiv.tvFilter = !showDiv.tvFilter;showDiv.MediaFilter = false;">
+              <mat-icon class="play-arrow">play_arrow</mat-icon>
+          </div>
+      </div>
+      <div class="growth-sec">
+        <div class="g-input">
+          <label>WOA</label>
+        <div class="input-group-append">
+          <input type="text" class="form-control input-append" [(ngModel)]="input_values_by_brand[selectedBrand].woa" placeholder="0" disabled>
+          <span class="input-group-text input-align">%</span>
+        </div>
+        </div>
+      </div>
+      <div class="filter-title">
+          <img src="../../../assets/images/filter_icon.jpg"> <span>Media</span>
+          <div class="subside-filter"
+              (click)="showDiv.MediaFilter = !showDiv.MediaFilter;showDiv.tvFilter = false;"><mat-icon class="play-arrow">play_arrow</mat-icon>
+          </div>
+      </div>
+      <div class="g-input">
+        <label>Total Digital Spend</label>
+      <div class="input-group-append">
+        <input type="text" class="form-control input-append" [(ngModel)]="input_values_by_brand[selectedBrand].total_spend" placeholder="0" disabled>
+      </div>
+      </div>
+  </div>
+                <!-- top sub filter TV start from here -->
+
+
+                <div class="subfilter-tv" *ngIf="showDiv.tvFilter">
+    <button (click)="showDiv.tvFilter = !showDiv.tvFilter;" class="close-btn"><mat-icon>close</mat-icon></button>
+    <div class="cost-grp">Cost Per GRP</div>
+
+    <div class="g-input sub-track" *ngFor="let genre of tv_genres[selectedBrand], let i=index">
+      <label>{{genre.genre_platform}}</label>
+      <div class="input-group-append">
+        <input type="text" class="form-control input-append" placeholder="0" name="genre-{{i}}" [(ngModel)]="genre.current_cost_per_unit" disabled>
+      </div>
+    </div>
+  </div>
+
+
+                <!-- top sub filter Media start from here -->
+
+
+                <div class="subfilter-media" *ngIf="showDiv.MediaFilter">
+    <button (click)="showDiv.MediaFilter = !showDiv.MediaFilter;" class="close-btn"><mat-icon>close</mat-icon></button>
+    <div class="cost-grp">Cost Per GRP</div>
+    <div class="growth-sec" style="border: none; width: 100%;">
+    </div>
+
+    <div class="g-input mb-1" *ngFor="let platform of digital_platforms[selectedBrand], let i=index">
+      <label>{{platform.genre_platform}}</label>
+      <div class="input-group-append">
+        <input type="text" class="form-control input-append" placeholder="0" name="platform-{{i}}"   [(ngModel)]="platform.current_cost_per_unit" disabled>
+      </div>
+    </div>
+  </div>
+            </div>
+            <img src="../../../assets/images/header_logo.jpg" style="position: relative;
+        top: -5px;"><span style="color:white">Canvas/Business Simulator </span>
+            <div class="user-dropdown">
+                <img class="user-icon" src="../../../assets/images/user.png"> <span>User Name</span>
+            </div>
+            <!-- <button class="home-btn">
+                <mat-icon>home</mat-icon>
+            </button> -->
+            <button class="insert-comment" data-toggle="collapse" href="#multiCollapseExample1">
+                <mat-icon> insert_comment</mat-icon>
+            </button>
+
+            <div class="msg-toogle">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="d-flex flex-column comment-section" id="myGroup">
+                        <div class="bg-white p-2">
+                            <div class="d-flex flex-row user-info"><img class="rounded-circle"
+                                    src="https://i.imgur.com/RpzrMR2.jpg" width="40">
+                                <div class="d-flex flex-column justify-content-start ml-2"><span
+                                        class="d-block font-weight-bold name">Marry Andrews</span><span
+                                        class="date text-black-50">Shared publicly - Jan 2020</span></div>
+                            </div>
+                            <div class="mt-2">
+                                <p class="comment-text">Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit
+                                    amet, consectetur.</p>
+                            </div>
+                            <div class="d-flex flex-row align-items-start"><textarea
+                                    class="form-control ml-1 shadow-none textarea"></textarea></div>
+                            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none"
+                                    type="button">Post comment</button></div>
+                        </div>
+
+                        <div id="collapse-1" class="bg-light p-2 collapse" data-parent="#myGroup">
+                            <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
+                                    src="https://i.imgur.com/RpzrMR2.jpg" width="40"><textarea
+                                    class="form-control ml-1 shadow-none textarea"></textarea></div>
+                            <div class="mt-2 text-right"><button class="btn btn-primary btn-sm shadow-none"
+                                    type="button">Post comment</button><button
+                                    class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+                                    type="button">Cancel</button></div>
+                        </div>
+                        <div id="collapse-2" class="bg-light p-2 collapse" data-parent="#myGroup">
+                            <div class="d-flex flex-row align-items-start"><i
+                                    class="fa fa-facebook border p-3 rounded mr-1"></i><i
+                                    class="fa fa-twitter border p-3 rounded mr-1"></i><i
+                                    class="fa fa-linkedin border p-3 rounded mr-1"></i><i
+                                    class="fa fa-instagram border p-3 rounded mr-1"></i><i
+                                    class="fa fa-dribbble border p-3 rounded mr-1"></i> <i
+                                    class="fa fa-pinterest-p border p-3 rounded mr-1"></i> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

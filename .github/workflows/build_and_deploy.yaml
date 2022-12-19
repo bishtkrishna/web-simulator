@@ -1,0 +1,97 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency: 
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write
+  contents: write
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-and-push:
+    name: Build and Push
+    runs-on: ubuntu-20.04
+    env:
+      ECR_REGION: us-east-2
+      ECR_REPO_URL: 183391460171.dkr.ecr.us-east-2.amazonaws.com/roi-simulator
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1.6.1
+        with:
+          role-to-assume: arn:aws:iam::183391460171:role/simulator_front_github_actions_role
+          role-session-name: simulator_front_github_actions
+          aws-region: us-east-2
+
+      - name: Configure ECR Credentials
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set Image Tags
+        run: |
+          DEPLOY_TYPE='front'
+          echo "SHA_IMAGE_TAG=${DEPLOY_TYPE}-${GITHUB_SHA::7}" >> $GITHUB_ENV
+          echo "LATEST_IMAGE_TAG=${DEPLOY_TYPE}-latest" >> $GITHUB_ENV
+
+      - name: Build & Push Docker Image
+        run: |
+          docker buildx build . \
+            --platform linux/amd64 \
+            --progress=plain \
+            --tag "${ECR_REPO_URL}:${SHA_IMAGE_TAG}" \
+            --tag "${ECR_REPO_URL}:${LATEST_IMAGE_TAG}" \
+            --compress \
+            --squash \
+            --push
+
+      - name: Checkout k8s-clusters Repo
+        uses: actions/checkout@v2
+        with:
+          repository: pepsico-ecommerce/k8s-clusters
+          fetch-depth: 0
+          ssh-key: ${{ secrets.GH_USER_PEPECOMMOPS_SSH_KEY_PRIVATE }}
+          ref: master
+
+      - name: Update Image Tag
+        working-directory: nonprod01-use1/roi-simulator/roi-simulator-front
+        run: |
+          git config --global user.email 'github-actions@pepsi.co'
+          git config --global user.name 'GitHub Actions'
+
+          kustomize edit set image roi-simulator=${ECR_REPO_URL}:${SHA_IMAGE_TAG}
+          
+      - name: Push k8s Changes
+        working-directory: nonprod01-use1
+        run: |
+          git add -A
+
+          commit_message="Updated deployment image to: ${ECR_REPO_URL}:${SHA_IMAGE_TAG}"
+          git diff-index --quiet HEAD || git commit -m "${commit_message}"
+
+          GIT_PUSH_ATTEMPTS_TOTAL=5
+          GIT_PUSH_ATTEMPTS=1
+          until git push origin master || [ "$GIT_PUSH_ATTEMPTS" -ge $GIT_PUSH_ATTEMPTS_TOTAL ]; do
+            echo "Attempting to push changes (${GIT_PUSH_ATTEMPTS}/${GIT_PUSH_ATTEMPTS_TOTAL})"
+            git pull --rebase --ff-only origin master
+            GIT_PUSH_ATTEMPTS=$((GIT_PUSH_ATTEMPTS+1))
+            sleep 5
+          done
+
+          if [[ "$GIT_PUSH_ATTEMPTS" -eq $GIT_PUSH_ATTEMPTS_TOTAL ]]; then
+            echo "Unable to push to Git repository"
+            exit 1
+          fi
+
+          echo "Manifests have been updated successfully"

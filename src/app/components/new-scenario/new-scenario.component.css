@@ -1,0 +1,89 @@
+.container-fluid{
+    background-color: #efeeee!important;
+    height: 100vh;
+}
+
+.header-logo{
+    background-color: #000;
+    text-align: center;
+    width: 100%;
+    padding: 7px;
+}
+.new-scenario {
+    /* border: solid 1px #d6d6d6; */
+    /* height: 400px; */
+    width: 700px;
+    margin: 50px auto;
+}
+.mat-form-field{
+    width: 100%; 
+    margin: 15px 0;  
+}
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex{
+    background: #fff!important;
+    padding: .75em .75em 0 .75em!important;
+}
+::ng-deep.mat-select-panel{
+    min-width: 390px!important;
+    margin: 50px 0 0 28px;
+}
+button.simulation-for {
+    border: solid 1px #ccc;
+    padding: 6px;
+    margin: 6px 17px 6px 0px;
+    border-radius: 7px;
+    width: 44%;
+    background: #fff;
+}
+.pr-4 .active{
+    background-color: #0272d5!important;
+    color: #fff;
+    font-weight: 500;
+    border: none;
+}
+.simulation-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+button.inputs-samulation {
+    width: 100%;
+    border: none;
+    background: #16c81d;
+    padding: 7px;
+    border-radius: 10px;
+    margin-top: 50px;
+    color: #fff;
+    font-size: 18px;
+}
+button.inputs-Cancel {
+    width: 100%;
+    border: none;
+    background: #fff;
+    padding: 7px;
+    border-radius: 10px;
+    margin-top: 50px;
+    color: #16c81d;
+    font-size: 18px;
+}
+button.brand-btn {
+    border-radius: 260px;
+    background: #fff;
+    border: solid 5px #e7e3e3;
+    padding: 5px;
+    margin: 10px 12px 10px 0px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+button.brand-btn:hover{
+    background: none;
+    border: solid 5px #e7e3e3;
+    /* opacity:4; */
+    transform: scale(1.05);
+}
+button.brand-btn img {
+    width: 40px;
+    height: 40px;
+} 
+button.brand-btn.active{
+    background: #5898d1;
+    border: solid 6px #c9ddef;
+}
